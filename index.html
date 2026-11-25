@@ -1,0 +1,146 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Well Do You Know SIDIKU HILIHAAM?</title>
+<style>
+    * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #ff2e63, #ff8fab, #a855f7, #3b82f6);
+    background-size: 300% 300%;
+    animation: shine 8s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 12px 20px 12px;
+  }
+  @keyframes shine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+  .card {
+    background: rgba(255,255,255,0.95);
+    width: 100%; max-width: 440px;
+    border-radius: 28px; padding: 30px 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35), 0 0 0 4px rgba(255,255,255,0.6);
+    text-align: center;
+  }
+  .badge { background: linear-gradient(90deg, #ff2e63, #a855f7); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px; }
+  h1 { font-size: 27px; margin: 14px 0 5px; color: #1e1e1e; line-height: 1.2; }
+  h1 span { color: #ff2e63; }
+  p { color: #666; font-size: 15px; margin-top: 0; }
+  .question { background: #fff0f5; border: 1px solid #ffe3ec; border-radius: 18px; padding: 16px; margin: 16px 0; text-align: left; }
+  .question b { font-size: 16px; color: #333; }
+  button.opt { display: block; width: 100%; padding: 13px; margin-top: 10px; border: 2px solid #ffe3ec; border-radius: 12px; background: white; font-size: 15px; cursor: pointer; }
+  button.opt.selected { background: #ff2e63; color: white; border-color: #ff2e63; transform: scale(1.02); }
+  #submitBtn {
+    background: linear-gradient(90deg, #ff2e63, #a855f7);
+    color: white; border: none; font-weight: bold; font-size: 18px;
+    padding: 16px; border-radius: 16px;
+    margin-top: 20px; width: 100%;
+    box-shadow: 0 8px 20px rgba(255,46,99,0.4);
+    cursor: pointer;
+  }
+  #result { font-size: 20px; font-weight: bold; margin-top: 18px; }
+  .spacer { height: 120px; }
+  #popup { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; z-index: 999; padding: 20px; }
+  .popup-box { background: white; border-radius: 24px; padding: 30px 22px; text-align: center; max-width: 360px; width: 100%; animation: pop 0.3s ease; }
+  @keyframes pop { from { transform: scale(0.7); } to { transform: scale(1); } }
+  .popup-box h2 { font-size: 28px; margin: 5px 0; }
+  .popup-box p { font-size: 18px; color: #333; font-weight: bold; line-height: 1.4; }
+  .popup-box button { background: #ff2e63; color: white; border: none; padding: 13px 20px; border-radius: 12px; font-size: 16px; font-weight: bold; width: 100%; margin-top: 10px; cursor: pointer; }
+</style>
+
+<div class="card">
+  <span class="badge">✨ THE ULTIMATE TEST ✨</span>
+  <h1>How Well Do You<br>Know <span>SIDIKU HILIHAAM?</span></h1>
+  <p>Be honest... I will know if you lie 😏💖</p>
+
+  <div class="question">
+    <b>1. What is my favorite food? 🍽️</b>
+    <button class="opt" onclick="pick(this,1,'Yam')">Yam</button>
+    <button class="opt" onclick="pick(this,1,'Banku')">Banku</button>
+    <button class="opt" onclick="pick(this,1,'Waakye')">Waakye</button>
+  </div>
+  <div class="question">
+    <b>2. What is my favorite color? 🎨</b>
+    <button class="opt" onclick="pick(this,2,'Pink')">Pink 💖</button>
+    <button class="opt" onclick="pick(this,2,'Blue')">Blue 💙</button>
+    <button class="opt" onclick="pick(this,2,'Black')">Black 🖤</button>
+  </div>
+  <div class="question">
+    <b>3. What do I love doing most? ✏️</b>
+    <button class="opt" onclick="pick(this,3,'Sleeping')">Sleeping 😴</button>
+    <button class="opt" onclick="pick(this,3,'Eating')">Eating 🍔</button>
+    <button class="opt" onclick="pick(this,3,'Drawing')">Drawing 🎨</button>
+  </div>
+  <div class="question">
+    <b>4. What is my favorite drink? 🥤</b>
+    <button class="opt" onclick="pick(this,4,'Fruteli')">Fruteli</button>
+    <button class="opt" onclick="pick(this,4,'Coke')">Coke</button>
+    <button class="opt" onclick="pick(this,4,'Water')">Water</button>
+  </div>
+  <div class="question">
+    <b>5. Am I a morning person or night owl? 🌙</b>
+    <button class="opt" onclick="pick(this,5,'Morning')">Morning person ☀️</button>
+    <button class="opt" onclick="pick(this,5,'Night')">Night owl 🦉</button>
+  </div>
+
+  <button id="submitBtn" onclick="check()">See My Score ❤️</button>
+  <div id="result"></div>
+</div>
+
+<div class="spacer"></div>
+
+<div id="popup">
+  <div class="popup-box">
+    <div id="popupEmoji" style="font-size:70px;">💖</div>
+    <h2 id="popupTitle">Title</h2>
+    <p id="popupMsg">Message</p>
+    <button onclick="closePopup()">Okay 💖</button>
+  </div>
+</div>
+
+<script>
+  let answers = {};
+  let correct = {1:'Yam', 2:'Pink', 3:'Drawing', 4:'Fruteli', 5:'Night'};
+  function pick(btn, q, val){
+    answers[q]=val;
+    let parent = btn.parentElement;
+    parent.querySelectorAll('button').forEach(b=>b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+  function check(){
+    let score=0;
+    for(let q in correct){ if(answers[q]==correct[q]) score++; }
+    let percent = score*20;
+    let emoji = "", title = "", msg = "";
+    if(percent == 100){
+      emoji = "💖🤗";
+      title = "PERFECT SCORE!";
+      msg = "Love u, u know me very much! 💖🤗 You are my REAL bestie!";
+    } else if(percent == 80){
+      emoji = "😍🥰";
+      title = "SO CLOSE!";
+      msg = "80%! You know me so well! Almost bestie status! 😍";
+    } else if(percent == 60){
+      emoji = "🙂👍";
+      title = "NOT BAD!";
+      msg = "60%! You try small small. You know me a little bit! 🙂";
+    } else if(percent == 40){
+      emoji = "😅🤔";
+      title = "HMMM...";
+      msg = "40% only? Do you even know me? Try again! 😅";
+    } else {
+      emoji = "🤣🤡";
+      title = "LOSER!";
+      msg = "LOSER GET OUT OF HERE! 😭😂 You don't know me at ALL!";
+    }
+    document.getElementById('result').innerHTML = "You scored " + percent + "%";
+    document.getElementById('popupEmoji').innerHTML = emoji;
+    document.getElementById('popupTitle').innerHTML = title;
+    document.getElementById('popupMsg').innerHTML = msg;
+    document.getElementById('popup').style.display = 'flex';
+  }
+  function closePopup(){
+    document.getElementById('popup').style.display = 'none';
+  }
+</script>
